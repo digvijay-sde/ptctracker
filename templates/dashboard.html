@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTC Order Tracker - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>PTC Order Tracker - Dashboard</h1>
+</header>
+
+<div class="container dashboard">
+    <h2>Delivery Information</h2>
+
+    {% if deliveries %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Delivery Date</th>
+                    <th>Delivery Image</th>
+                    <th>Delivery Number</th>
+                    <th>Weight</th>
+                    <th>Items</th>
+                    <th>Transport Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in deliveries %}
+                    <tr>
+                        <td>{{ delivery['Delivery Date'] }}</td>
+                        <td><img src="{{ delivery['Delivery Image URL'] }}" alt="Delivery Image" style="width: 100px;"></td>
+                        <td>{{ delivery['Delivery Number'] }}</td>
+                        <td>{{ delivery['Weight'] }}</td>
+                        <td>{{ delivery['Items'] }}</td>
+                        <td>{{ delivery['Transport Name'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No deliveries found for this user.</p>
+    {% endif %}
+    
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+</body>
+</html>
